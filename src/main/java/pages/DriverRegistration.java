@@ -1,9 +1,12 @@
 package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.List;
+
 
 
 public class DriverRegistration{
@@ -14,7 +17,7 @@ private By addDriverBtn = By.xpath("//div[text()='Add Driver']");
 private By singleDriverOption = By.xpath("//div[text()='Single Driver']");
 private By mobileField = By.xpath("//input[contains(@placeholder,'Enter Mobile Number')]");
 private By sendOtpBtn = By.xpath("//div[text()='Send OTP']");
-// private By otpInputs = By.xpath("//div[contains(@class,'flex justify-center px-10')]");
+private By otpInputs = By.cssSelector("div.flex.items-center.h-20.w-20 input");
 private By submitBtn = By.xpath("//div[text()='Submit']");
 
 public DriverRegistration(WebDriver driver){
@@ -30,8 +33,14 @@ public void driverRegistration(String mobile, String otp){
     driver.findElement(singleDriverOption).click();
     driver.findElement(mobileField).sendKeys(mobile);
     driver.findElement(sendOtpBtn).click();
-    // new LoginPage(driver).otpInputs(otp);
-    driver.findElement(submitBtn).click();
+    wait.until(driver ->
+    driver.findElements(otpInputs).size() > 0);
+    List<WebElement> fields = driver.findElements(otpInputs);
+    for (int i = 0; i < otp.length(); i++) {
+    fields.get(i).sendKeys(String.valueOf(otp.charAt(i)));
+}
+
+  driver.findElement(submitBtn).click();
 
 }
 
