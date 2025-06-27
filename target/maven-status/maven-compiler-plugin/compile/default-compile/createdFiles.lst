@@ -1,0 +1,5 @@
+pages/DriverRegistration.class
+base/BaseClass.class
+pages/LoginPage.class
+pages/Operator_ProfilePage.class
+pages/Operator_InspectionPage.class
