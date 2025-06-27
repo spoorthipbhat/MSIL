@@ -1,0 +1,4 @@
+tests/Operator_InspectionTest.class
+tests/LoginTest.class
+tests/Operator_ProfileTest.class
+DriverRegistrationTest.class
