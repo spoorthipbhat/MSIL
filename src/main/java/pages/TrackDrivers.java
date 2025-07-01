@@ -13,7 +13,6 @@ public class TrackDrivers {
     private WebDriver driver;
 
     private By refreshBtn = By.xpath("//div[contains(text(),'Refresh')]");
-
     public TrackDrivers(WebDriver driver) {
         this.driver = driver;
     }
@@ -37,7 +36,6 @@ public class TrackDrivers {
             .until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)))
             .click();
             Thread.sleep(2000);
-
     }
     
 }
