@@ -8,13 +8,14 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.testng.annotations.Optional;
 
 public class BaseClass {
 
 protected WebDriver driver;
 @Parameters("browser")
 @BeforeMethod
-public void setUp(String browser){
+public void setUp(@Optional("chrome") String browser) {
     switch (browser.toLowerCase()){
         case "chrome":
         WebDriverManager.chromedriver().setup();
