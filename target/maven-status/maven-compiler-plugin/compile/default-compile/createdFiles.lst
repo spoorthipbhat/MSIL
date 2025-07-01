@@ -1,8 +1,0 @@
-utils/TestDataProvider.class
-pages/DriverRegistration.class
-base/BaseClass.class
-utils/GoogleDrive.class
-pages/UploadDriverdocs.class
-pages/TrackDrivers.class
-pages/LoginPage.class
-utils/GoogleSheetReader.class
