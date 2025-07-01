@@ -15,9 +15,7 @@ private By oparatormobileNumber = By.xpath("//input[@placeholder='Enter mobile n
 private By checkBox = By.xpath("//input[@type='checkbox']");
 private By continueButton = By.xpath("//div[@data-button-text='Continue']");
 private By otpFields = By.xpath("//div[contains(@class, 'text-otp')]/div/input");
-private By getUploadBtnByMobile(String mobile) {
-    return By.xpath("//div[text()='" + mobile + "']/parent::div/following-sibling::div//div[text()='Upload']");
-}
+
 
 // private By upload = By.xpath("//div[text()='Upload']");
 
@@ -25,7 +23,6 @@ private By getUploadBtnByMobile(String mobile) {
 public LoginPage(WebDriver driver){
 this.driver=driver;
 }
-
 
 public void loginAsOperator(String MobileNo, String otp){
     driver.findElement(oparatormobileNumber).sendKeys(MobileNo);

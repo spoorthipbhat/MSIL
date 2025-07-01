@@ -19,7 +19,6 @@ private By mobileField = By.xpath("//input[contains(@placeholder,'Enter Mobile N
 private By sendOtpBtn = By.xpath("//div[text()='Send OTP']");
 private By otpInputs = By.cssSelector("div.flex.items-center.h-20.w-20 input");
 private By submitBtn = By.xpath("//div[text()='Submit']");
-
 public DriverRegistration(WebDriver driver){
     this.driver = driver;
 }
@@ -28,8 +27,6 @@ public void driverRegistration(String mobile, String otp){
 
     wait.until(ExpectedConditions.visibilityOfElementLocated(addDriverBtn));
     driver.findElement(addDriverBtn).click();
-
-    // driver.findElement(addDriverBtn).click();
     driver.findElement(singleDriverOption).click();
     driver.findElement(mobileField).sendKeys(mobile);
     driver.findElement(sendOtpBtn).click();
