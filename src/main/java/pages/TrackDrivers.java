@@ -11,6 +11,7 @@ import org.openqa.selenium.JavascriptExecutor;
 public class TrackDrivers {
 
     private WebDriver driver;
+
     private WebDriverWait wait;
 
     private By refreshBtn = By.xpath("//div[contains(text(),'Refresh')]");
@@ -18,7 +19,6 @@ public class TrackDrivers {
     public TrackDrivers(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
 
     public void clickUploadForMobile(String mobileNo) throws InterruptedException {
         Thread.sleep(2000);
@@ -39,6 +39,7 @@ public class TrackDrivers {
             .until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)))
             .click();
             Thread.sleep(2000);
+
     
 
     }
