@@ -39,6 +39,7 @@ public void setUp(String browser){
 
     driver.manage().window().maximize();
     driver.get("https://maruti.moving.tech/");
+    // driver.get("https://dashboard-d2c.marutisuzukicollatex.com/");//UAT
 
 }
 @AfterMethod
