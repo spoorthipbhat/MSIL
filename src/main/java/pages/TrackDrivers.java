@@ -39,9 +39,6 @@ public class TrackDrivers {
             .until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)))
             .click();
             Thread.sleep(2000);
-
-    
-
     }
     
     public void clickThreeDotsForMobile(String mobile) {

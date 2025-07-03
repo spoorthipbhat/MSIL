@@ -34,11 +34,5 @@ public void loginAsOperator(String MobileNo, String otp){
     }
     driver.findElement(continueButton).click();
 
-    // try {
-    //     Thread.sleep(15000);
-    // } catch (InterruptedException e) {
-    //     e.printStackTrace();
-    // }
-
 }
 }
