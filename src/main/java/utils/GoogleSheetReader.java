@@ -16,7 +16,7 @@ public class GoogleSheetReader {
     private static Sheets sheetsService;
     private static final String SHEET_ID = "17vx7HgEWZPLQAJp2Gd8BsYZEhGH1KQ_kvREcNIEyhpI";
     private static final String APPLICATION_NAME = "AutomationSheetReader";
-    private static final String SERVICE_ACCOUNT_KEY_PATH = "src/test/java/Resources/Token.json"; // <-- Update this path
+    private static final String SERVICE_ACCOUNT_KEY_PATH = "src/test/resources/Token.json"; // <-- Update this path
 
     private static Sheets getSheetsService() throws IOException, GeneralSecurityException {
         if (sheetsService == null) {

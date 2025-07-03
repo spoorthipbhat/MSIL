@@ -12,13 +12,11 @@ public class TrackDrivers {
 
     private WebDriver driver;
 
-    private WebDriverWait wait;
-
     private By refreshBtn = By.xpath("//div[contains(text(),'Refresh')]");
 
     public TrackDrivers(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
 
     public void clickUploadForMobile(String mobileNo) throws InterruptedException {
         Thread.sleep(2000);
@@ -39,13 +37,7 @@ public class TrackDrivers {
             .until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)))
             .click();
             Thread.sleep(2000);
-    }
-    
-    public void clickThreeDotsForMobile(String mobile) {
-        By threeDots = By.xpath("//div[text()='" + mobile + "']/ancestor::tr//div[contains(@class, 'justify-end')]");
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-            .until(ExpectedConditions.elementToBeClickable(threeDots))
-            .click();
+
     }
     
 }
