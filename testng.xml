@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SeleniumProjectSuite">
 <parameter name = "browser" value = "chrome"/>
@@ -8,3 +11,37 @@
         </classes>
     </test>
 </suite> 
+-->
+<!-- CONFIGURATION 1: RUN ALL METHODS (ACTIVE) -->
+
+<suite name="Operator Profile All Methods Suite" parallel="false">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="master"/>
+    <test name="All Operator Profile Tests">
+        <classes>
+            <class name="tests.OperatorProfileTest"/>
+        </classes>
+    </test>
+</suite>
+
+<!-- CONFIGURATION 2: RUN SPECIFIC METHODS (COMMENTED) -->
+
+<!--
+<suite name="Operator Profile Specific Methods Suite" parallel="false">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="master"/>
+    <test name="Specific Operator Profile Tests">
+        <classes>
+            <class name="tests.OperatorProfileTest">
+                <methods>
+                    <include name="testProfilePanelAndLogoutButtonVisibility"/>
+                    <include name="testViewProfileDetails"/>
+                    <include name="testUpdateProfileName"/>
+                    <include name="testUpdateProfileEmail"/>
+                   
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
+-->
