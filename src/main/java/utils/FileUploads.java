@@ -27,6 +27,6 @@ public class FileUploads {
                 input);
 
         input.sendKeys(filePath);
-        Thread.sleep(3000); // You can replace with smarter waits
+        Thread.sleep(3000); 
     }
 }

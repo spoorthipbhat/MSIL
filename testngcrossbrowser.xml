@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CrossBrowserSuite" parallel="tests" thread-count="3">
+    <parameter name="env" value="master"/>
+    <parameter name="incognito" value="true"/>
+
+    <test name="ChromeTest">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="SheetName" value="Sheet1"/>
+        <parameter name="FlowName" value="LoginFlow"/>
+        <classes>
+            <class name="tests.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="FirefoxTest">
+        <parameter name="browser" value="firefox"/>
+        <parameter name="SheetName" value="Sheet2"/>
+        <parameter name="FlowName" value="OperatorProfileFlow"/>
+        <classes>
+            <class name="tests.DriverRegistrationTest"/>
+        </classes>
+    </test>
+
+    <test name="EdgeTest">
+        <parameter name="browser" value="edge"/>
+        <parameter name="SheetName" value="Sheet3"/>
+        <parameter name="FlowName" value="VehicleFlow"/>
+        <classes>
+            <class name="tests.VehicleaddTest"/>
+        </classes>
+    </test>
+</suite>
