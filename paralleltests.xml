@@ -1,0 +1,14 @@
+<suite name="AllTests" parallel="tests" thread-count="2">
+ <parameter name="incognito" value="false"/>
+
+    <test name="LoginTests">
+        <classes>
+            <class name="tests.LoginTest"/>
+        </classes>
+    </test>
+    <test name="DriverTests">
+        <classes>
+            <class name="tests.DriverRegistrationTest"/>
+        </classes>
+    </test>
+</suite>

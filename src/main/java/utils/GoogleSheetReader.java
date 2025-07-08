@@ -16,7 +16,7 @@ public class GoogleSheetReader {
     private static Sheets sheetsService;
     private static final String SHEET_ID = "17vx7HgEWZPLQAJp2Gd8BsYZEhGH1KQ_kvREcNIEyhpI";
     private static final String APPLICATION_NAME = "AutomationSheetReader";
-    private static final String SERVICE_ACCOUNT_KEY_PATH = "src/test/resources/Token.json"; // <-- Update this path
+    private static final String SERVICE_ACCOUNT_KEY_PATH = "src/test/resources/Token.json"; 
 
     private static Sheets getSheetsService() throws IOException, GeneralSecurityException {
         if (sheetsService == null) {
@@ -47,7 +47,7 @@ public class GoogleSheetReader {
         String expectedValue
 ) throws IOException, GeneralSecurityException {
 
-    String finalRange = sheetName + "!A1:Z1000"; // Adjust range as needed
+    String finalRange = sheetName + "!A1:Z1000"; 
     List<List<Object>> rawData = readSheetData(SHEET_ID, finalRange);
 
     if (rawData == null || rawData.size() < 2) {
