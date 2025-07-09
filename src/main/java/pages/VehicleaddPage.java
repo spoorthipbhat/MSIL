@@ -43,7 +43,7 @@ public class VehicleaddPage {
                            String leftImg, String frontIntImg, String backIntImg, String odoImg)
             throws InterruptedException, IOException {
 
-Thread.sleep(5000);
+        Thread.sleep(5000);
         driver.findElement(addVehicleBtn).click();
         Thread.sleep(2000);
         driver.findElement(enterRcNo).sendKeys(rcNum);
