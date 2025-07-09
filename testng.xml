@@ -1,9 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SeleniumProjectSuite">
 <parameter name = "browser" value = "chrome"/>
+  <parameter name="env" value="uat"/>
     <test name="LoginTest">
         <classes>
-            <class name="tests.DriverRegistrationTest" />
+            <class name="tests.VehicleaddTest" />
         </classes>
     </test>
 </suite> 
