@@ -1,17 +1,22 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SeleniumProjectSuite">
-<parameter name = "browser" value = "chrome"/>
-<parameter name="env" value="master"/>
- <parameter name="incognito" value="false"/>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="master"/>
+    <parameter name="incognito" value="false"/>
+
     <test name="LoginTest">
-<parameter name = "SheetName" value = "Sheet1"/>
-<parameter name="FlowName" value="LoginFlow"/>
+        <parameter name="SheetName" value="Sheet1"/>
+        <parameter name="FlowName" value="LoginFlow"/>
         <classes>
-            <class name="tests.DriverRegistrationTest"/>
+            <class name="tests.LoginTest"/>
         </classes>
     </test>
-</suite> 
 
-
-
-
+    <test name="OperatorProfileTest">
+        <parameter name="SheetName" value="Sheet2"/>
+        <parameter name="FlowName" value="Positive"/>
+        <classes>
+            <class name="tests.OperatorProfileTest"/>
+        </classes>
+    </test>
+</suite>
