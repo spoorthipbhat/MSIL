@@ -13,6 +13,15 @@
 
 <parameter name = "browser" value = "chrome"/>
 <parameter name="env" value="master"/>
+
+ <parameter name="incognito" value="false"/>
+    <test name="LoginTest"/>
+<parameter name = "SheetName" value = "Sheet1"/>
+<parameter name="FlowName" value="LoginFlow"/>
+        <classes>
+            <class name="tests.VehicleaddTest" />
+
+
 <parameter name="incognito" value="false"/>
 <test name="LoginTest">
 <parameter name = "SheetName" value = "Sheet1"/>
