@@ -108,43 +108,36 @@ public class FleetRegistration {
 
     public void addBusinessFleet(String fleetName, String aadhaarNumber, String aadhaarFrontImage, String aadhaarBackImage, String fleetEmail,
     String fleetCity, String businessGstNumber, String gstImage, String businessPanNumber, String PanImage, String businessLicenseNumber, String licenseImage) throws InterruptedException, IOException {
-        
-        // Enter Bussiness Fleet Name
+        Thread.sleep(1000);
         sendKeysToVisible(enterFleetName, fleetName);
         System.out.println("✅ Entered Fleet name: "+ fleetName);
 
-        // Enter and upload the aadhaar number and image for Bussiness fleet
         sendKeysToVisible(inputAadhaarNumber, aadhaarNumber);
         FileUploads.uploadHiddenFile(driver, uploadAadhaarFrontFile, FileUploads.downloadTemp(aadhaarFrontImage, "AADHAAR_FRONT"));
         FileUploads.uploadHiddenFile(driver, uploadAadhaarBackFile, FileUploads.downloadTemp(aadhaarBackImage, "AADHAAR_BACK"));
         System.out.println("✅ Aadhaar number and image is uploaded: "+ aadhaarNumber);
 
-        // Enter Bussiness Fleet email
         sendKeysToVisible(enterFleetEmail, fleetEmail);
         System.out.println("✅ Entered Fleet email: "+ fleetEmail);
         
-        // Selecting onboarding city for Bussiness Fleet
         clickVisible(selectCityDropdown);
         By cityOption = By.xpath("//div[text() = 'MSIL PARTNER:" + fleetCity + "']");
         clickVisible(cityOption);
         System.out.println("✅ Selected City: " + fleetCity);
 
-        // Enter and upload the GST number and image for Bussiness fleet
         sendKeysToVisible(enterGstNumber, businessGstNumber);
         FileUploads.uploadHiddenFile(driver, uploadGstFile, FileUploads.downloadTemp(gstImage, "GST"));
         System.out.println("✅ GST number and image is uploaded: "+ businessGstNumber);
 
-        // Enter and upload the PAN number and image for Bussiness fleet
         sendKeysToVisible(enterPanNumber, businessPanNumber);
         FileUploads.uploadHiddenFile(driver, uploadPan_Business, FileUploads.downloadTemp(PanImage, "PAN"));
         System.out.println("✅ PAN number and image is uploaded: "+ businessPanNumber);
 
-        // Enter and upload the Business License Number and image 
         sendKeysToVisible(enterBusinessLicenseNumber, businessLicenseNumber);
         FileUploads.uploadHiddenFile(driver, uploadBusinessLicensefile, FileUploads.downloadTemp(licenseImage, "License"));
         System.out.println("✅ Business License Number and image is uploaded: "+ businessLicenseNumber);
 
-        Thread.sleep(3000); // Optional final wait
+        Thread.sleep(3000);
     }
 
 
@@ -152,49 +145,40 @@ public class FleetRegistration {
 
     public void addIndividualFleet(String fleetName, String aadhaarNumber, String aadhaarFrontImage, String aadhaarBackImage, String fleetEmail, 
         String fleetCity, String individualPanNumber, String individualPanImage) throws InterruptedException, IOException {
-        
-        // Select Individual Fleet
-        clickVisible(individualFleetButton);
         Thread.sleep(1000);
+        clickVisible(individualFleetButton);
         
-        // Enter Individual Fleet Name
         sendKeysToVisible(enterFleetName, fleetName);
         System.out.println("✅ Entered Fleet name: "+ fleetName);
 
-        // Enter and upload the Individual aadhaar number and image
         sendKeysToVisible(inputAadhaarNumber, aadhaarNumber);
         FileUploads.uploadHiddenFile(driver, uploadAadhaarFront_Individual, FileUploads.downloadTemp(aadhaarFrontImage, "AADHAAR_FRONT"));
         FileUploads.uploadHiddenFile(driver, uploadAadhaarBack_Individual, FileUploads.downloadTemp(aadhaarBackImage, "AADHAAR_BACK"));
         System.out.println("✅ Aadhaar number and image is uploaded: "+ aadhaarNumber);
 
-        // Enter Individual Fleet email
         sendKeysToVisible(enterFleetEmail, fleetEmail);
         System.out.println("✅ Entered Fleet email: "+ fleetEmail);
             
-        // Selecting onboarding city for Individual Fleet
         clickVisible(selectCityDropdown);
         By cityOption = By.xpath("//div[text() = 'MSIL PARTNER:" + fleetCity + "']");
         clickVisible(cityOption);
         Thread.sleep(2000);
-
         System.out.println("✅ Selected City: " + fleetCity);
 
-        // Enter and upload the PAN number and image for Individual fleet
         sendKeysToVisible(enterPanNumber, individualPanNumber);
         FileUploads.uploadHiddenFile(driver, uploadPan_Individual, FileUploads.downloadTemp(individualPanImage, "PAN"));
         System.out.println("✅ PAN number and image is uploaded: "+ individualPanNumber);
 
-        Thread.sleep(3000); // Optional final wait
+        Thread.sleep(3000);
     }
 
     // Method @3: Adding fleet owner in operator dashboard
 
     public void addFleetInOperator(String MobileNo, String otp) throws InterruptedException{
-
+        Thread.sleep(1000);
         ToastMessageHandler toastHandler = new ToastMessageHandler(driver);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // Tap on Fleet Tab in Operator Dashboard
         wait.until(ExpectedConditions.visibilityOfElementLocated(fleetsTab)).click();     
         driver.findElement(addFleetButton).click();                                       
         driver.findElement(enterNumber).sendKeys(MobileNo);
@@ -204,7 +188,6 @@ public class FleetRegistration {
         Thread.sleep(1000);
         if (toastHandler.checkAndPrintToastError()) return;     // to check number is already associated or not
 
-        // Wait for OTP fields to appear and to enter otp
         wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(otpFields, otp.length() - 1));
         List<WebElement> fields = driver.findElements(otpFields);
         System.out.println("✅ Found " + fields.size() + " OTP input fields");
@@ -217,12 +200,10 @@ public class FleetRegistration {
         System.out.println("✅ Fleet number " + MobileNo + " is added in operator ");
         Thread.sleep(2000);
 
-        // To verify that number is added or not
         driver.findElement(searchBox).sendKeys(MobileNo);
         wait.until(ExpectedConditions.visibilityOfElementLocated(numberToVerify));
         String displayedNumber = driver.findElement(numberToVerify).getText().trim();
 
-        // to upload the document and delete the added fleet
         if (MobileNo.equals(displayedNumber)) 
         {
             driver.findElement(menuOption).click();
@@ -245,7 +226,6 @@ public class FleetRegistration {
         System.out.println("✅ Entered Operator referral code: " + operatorCode);
         clickVisible(verifyButton);
         
-        // To display the Operator name after tapping the Verify button
         By resultTextLocator =    By.xpath("//div[contains(@class, 'text-green-500') and string-length(normalize-space()) > 0]");
         WebElement resultText =   wait.until(ExpectedConditions.visibilityOfElementLocated(resultTextLocator));
         System.out.println("✅ Operator referral Code belongs to: '" + resultText.getText()+" '");

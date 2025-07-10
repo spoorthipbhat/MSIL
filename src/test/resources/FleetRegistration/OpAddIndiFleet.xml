@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SeleniumProjectSuite">
+
+  <test name="Individual_Fleet_Test">
+    <parameter name="SheetName" value="Individualfleetregistration"/>
+    <parameter name="FlowName" value="individualfleetregistration"/>
+    <parameter name="FlowId" value="4"/>
+    <classes>
+      <class name="tests.FleetRegistrationTest"/>
+    </classes>
+  </test>
+
+</suite>
