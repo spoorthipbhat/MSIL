@@ -31,13 +31,14 @@ public class FleetRegistrationTest extends BaseClass {
 
         // ✅ Login first
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAsOperator("61111111111", "7891");
+        
 
         FleetRegistration fleetRegistration = new FleetRegistration(driver);
 
         switch (flowId) {
 
             case 1: // Business Fleet → Operator Code
+                loginPage.loginAsOperator("67211111111", "7891");
                 fleetRegistration.addBusinessFleet(
                         row.get("fleetName"),
                         row.get("aadhaarNumber"),
@@ -56,6 +57,7 @@ public class FleetRegistrationTest extends BaseClass {
                 break;
 
             case 2: // Individual Fleet → Operator Code
+                loginPage.loginAsOperator("67211111111", "7891");
                 fleetRegistration.addIndividualFleet(
                         row.get("fleetName"),
                         row.get("aadhaarNumber"),
@@ -70,6 +72,7 @@ public class FleetRegistrationTest extends BaseClass {
                 break;
 
             case 3: // Add Fleet in Operator → then Business Fleet
+                loginPage.loginAsOperator("61111111111", "7891");
                 fleetRegistration.addFleetInOperator(row.get("mobileNo"), row.get("otp"));
                 fleetRegistration.addBusinessFleet(
                         row.get("fleetName"),
@@ -88,6 +91,7 @@ public class FleetRegistrationTest extends BaseClass {
                 break;
 
             case 4: // Add Fleet in Operator → then Individual Fleet
+                loginPage.loginAsOperator("61111111111", "7891");   
                 fleetRegistration.addFleetInOperator(row.get("mobileNo"), row.get("otp"));
                 fleetRegistration.addIndividualFleet(
                         row.get("fleetName"),
