@@ -23,15 +23,20 @@ public class OperatorProfilePage {
         wait.until(ExpectedConditions.elementToBeClickable(editBtn)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(nameInput));
     }
-    public void enterNameAndEmail(String name, String email) {
-        WebElement nameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(nameInput));
-        WebElement emailInput = wait.until(ExpectedConditions.visibilityOfElementLocated(emailInput));
-        System.out.println("Name before: '" + nameInput.getAttribute("value") + "'");
-        ((JavascriptExecutor) driver).executeScript("arguments[0].value = arguments[1];", nameInput, name != null ? name : "");
-        System.out.println("Name after: '" + nameInput.getAttribute("value") + "'");
-        System.out.println("Email before: '" + emailInput.getAttribute("value") + "'");
-        ((JavascriptExecutor) driver).executeScript("arguments[0].value = arguments[1];", emailInput, email != null ? email : "");
-        System.out.println("Email after: '" + emailInput.getAttribute("value") + "'");
-        wait.until(ExpectedConditions.elementToBeClickable(updateBtn)).click();
-        System.out.println("tapped on update button");
-}  }
+   public void enterNameAndEmail(String name, String email) {
+    // ✅ Use different variable names for the WebElements
+    WebElement nameElement = wait.until(ExpectedConditions.visibilityOfElementLocated(nameInput));
+    WebElement emailElement = wait.until(ExpectedConditions.visibilityOfElementLocated(emailInput));
+
+    System.out.println("Name before: '" + nameElement.getAttribute("value") + "'");
+    ((JavascriptExecutor) driver).executeScript("arguments[0].value = arguments[1];", nameElement, name != null ? name : "");
+    System.out.println("Name after: '" + nameElement.getAttribute("value") + "'");
+
+    System.out.println("Email before: '" + emailElement.getAttribute("value") + "'");
+    ((JavascriptExecutor) driver).executeScript("arguments[0].value = arguments[1];", emailElement, email != null ? email : "");
+    System.out.println("Email after: '" + emailElement.getAttribute("value") + "'");
+
+    wait.until(ExpectedConditions.elementToBeClickable(updateBtn)).click();
+     System.out.println("tapped on update button");
+}
+ }
