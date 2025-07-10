@@ -1,5 +1,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SeleniumProjectSuite">
+
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="master"/>
+    <parameter name="incognito" value="false"/>
+
+    <test name="OperatorProfileFlow">
+        <parameter name="SheetName" value="Sheet2"/>
+        <parameter name="FlowName" value="Positive"/>
+        <classes>
+            <class name="tests.OperatorProfileTest"/>
+
 <parameter name = "browser" value = "chrome"/>
 <parameter name="env" value="master"/>
 <parameter name="incognito" value="false"/>
@@ -8,10 +19,7 @@
 <parameter name="FlowName" value="LoginFlow"/>
         <classes>
             <class name="tests.AddBulkdriverTest"/>
+
         </classes>
     </test>
-</suite> 
-
-
-
-
+</suite>
