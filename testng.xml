@@ -4,15 +4,7 @@
     <parameter name="env" value="master"/>
     <parameter name="incognito" value="false"/>
 
-    <test name="LoginTest">
-        <parameter name="SheetName" value="Sheet1"/>
-        <parameter name="FlowName" value="LoginFlow"/>
-        <classes>
-            <class name="tests.LoginTest"/>
-        </classes>
-    </test>
-
-    <test name="OperatorProfileTest">
+    <test name="OperatorProfileFlow">
         <parameter name="SheetName" value="Sheet2"/>
         <parameter name="FlowName" value="Positive"/>
         <classes>

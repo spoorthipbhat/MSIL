@@ -11,7 +11,7 @@ public class TestDataProvider {
         String sheetName = context.getCurrentXmlTest().getParameter("SheetName");
         String flowName = context.getCurrentXmlTest().getParameter("FlowName");
 
-        if (sheetName == null) sheetName = "Sheet1";
+        if (sheetName == null) sheetName = "Sheet";
         if (flowName == null) flowName = "LoginFlow";
 
         return GoogleSheetReader.getFilteredRowMap(sheetName, "FlowName", flowName);
