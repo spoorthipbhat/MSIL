@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SeleniumProjectSuite">
+
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="master"/>
+    <parameter name="incognito" value="false"/>
+
+    <test name="VehicleInspectionFlow">
+        <parameter name="SheetName" value="InspectionSheet"/>
+        <parameter name="FlowName" value="VehicleInspection"/>
+        <classes>
+            <class name="tests.VehicleInspectionTest"/>
+        </classes>
+    </test>
+
+</suite> 
