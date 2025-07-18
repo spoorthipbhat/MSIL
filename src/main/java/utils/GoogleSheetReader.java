@@ -47,7 +47,9 @@ public class GoogleSheetReader {
         String expectedValue
 ) throws IOException, GeneralSecurityException {
 
-    String finalRange = sheetName + "!A1:Z1000"; 
+   // String finalRange = sheetName + "!A1:Z1000"; 
+    String finalRange = sheetName + "!A1:AZ1000";
+
     List<List<Object>> rawData = readSheetData(SHEET_ID, finalRange);
 
     if (rawData == null || rawData.size() < 2) {
