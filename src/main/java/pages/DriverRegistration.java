@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
-
+import utils.OtpFetcher;
 
 
 public class DriverRegistration{
@@ -22,25 +22,49 @@ private By submitBtn = By.xpath("//div[text()='Submit']");
 public DriverRegistration(WebDriver driver){
     this.driver = driver;
 }
-public void driverRegistration(String mobile, String otp){
+
+
+public void driverRegistration(String mobile, String env) {
+    System.out.println("➡ Starting driver registration for: " + mobile);
+
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+    wait.until(ExpectedConditions.elementToBeClickable(addDriverBtn)).click();
+    wait.until(ExpectedConditions.elementToBeClickable(singleDriverOption)).click();
 
-
-    wait.until(ExpectedConditions.visibilityOfElementLocated(addDriverBtn));
-    driver.findElement(addDriverBtn).click();
-    driver.findElement(singleDriverOption).click();
-    driver.findElement(mobileField).sendKeys(mobile);
+    wait.until(ExpectedConditions.visibilityOfElementLocated(mobileField)).sendKeys(mobile);
+>>>>>>> Stashed changes
     driver.findElement(sendOtpBtn).click();
-    wait.until(driver ->
-    driver.findElements(otpInputs).size() > 0);
+
+    // 🔄 Wait for OTP to be generated and fetched
+    String otp = null;
+    int attempts = 5;
+    while (attempts-- > 0) {
+        otp = env.equalsIgnoreCase("master")
+            ? "7891"
+            : OtpFetcher.getOtpBasedOnEnv(env, mobile);
+        if (otp != null && !otp.isEmpty()) break;
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    if (otp == null || otp.isEmpty()) {
+        throw new RuntimeException("❌ Driver OTP not fetched for: " + mobile);
+    }
+
+    wait.until(driver -> driver.findElements(otpInputs).size() > 0);
     List<WebElement> fields = driver.findElements(otpInputs);
-    for (int i = 0; i < otp.length(); i++) {
-    fields.get(i).sendKeys(String.valueOf(otp.charAt(i)));
+
+    for (int i = 0; i < otp.length() && i < fields.size(); i++) {
+        fields.get(i).sendKeys(String.valueOf(otp.charAt(i)));
+    }
+
+    driver.findElement(submitBtn).click();
 }
 
-  driver.findElement(submitBtn).click();
 
-}
 
 }
