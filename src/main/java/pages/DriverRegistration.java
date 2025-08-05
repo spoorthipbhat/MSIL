@@ -23,7 +23,6 @@ public DriverRegistration(WebDriver driver){
     this.driver = driver;
 }
 
-
 public void driverRegistration(String mobile, String env) {
     System.out.println("➡ Starting driver registration for: " + mobile);
 
@@ -33,7 +32,7 @@ public void driverRegistration(String mobile, String env) {
     wait.until(ExpectedConditions.elementToBeClickable(singleDriverOption)).click();
 
     wait.until(ExpectedConditions.visibilityOfElementLocated(mobileField)).sendKeys(mobile);
->>>>>>> Stashed changes
+
     driver.findElement(sendOtpBtn).click();
 
     // 🔄 Wait for OTP to be generated and fetched
