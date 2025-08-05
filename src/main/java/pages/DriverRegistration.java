@@ -25,12 +25,12 @@ public DriverRegistration(WebDriver driver){
 public void driverRegistration(String mobile, String otp){
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-
-
     wait.until(ExpectedConditions.visibilityOfElementLocated(addDriverBtn));
     driver.findElement(addDriverBtn).click();
     driver.findElement(singleDriverOption).click();
     driver.findElement(mobileField).sendKeys(mobile);
+
+    wait.until(ExpectedConditions.visibilityOfElementLocated(mobileField)).sendKeys(mobile);
     driver.findElement(sendOtpBtn).click();
     wait.until(driver ->
     driver.findElements(otpInputs).size() > 0);
