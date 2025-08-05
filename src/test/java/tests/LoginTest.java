@@ -1,6 +1,6 @@
 package tests;
-import org.testng.annotations.Test;
 import base.BaseClass;
+import org.testng.annotations.Test;
 import pages.LoginPage;
 public class  LoginTest extends BaseClass{
     @Test
@@ -8,6 +8,7 @@ public class  LoginTest extends BaseClass{
         LoginPage loginpage = new LoginPage(driver);
         loginpage.loginAsOperator("6111111111", "7891");
         System.out.println("Title of the page is:" +driver.getTitle());
+    
     }
 }
 

@@ -14,74 +14,95 @@ import utils.ConfigReader;
 
 public class BaseClass {
 
+    // Thread-safe WebDriver for parallel execution
     private static ThreadLocal<WebDriver> TL_DRIVER = new ThreadLocal<>();
     protected WebDriver driver;
 
+    // To avoid re-initializing driver across classes
+    private static boolean isDriverInitialized = false;
+
+    // 🔹 Env variable accessible from tests
+    protected static String env;
+
     @Parameters({"browser", "env", "incognito"})
-    @BeforeMethod
+    @BeforeClass
     public void setUp(@Optional("chrome") String browser,
-                      @Optional("master") String env,
+                      @Optional("master") String environment,
                       @Optional("false") String incognito) {
 
-        ConfigReader config = new ConfigReader();
-        config.loadProperties(env);
-        String url = config.get("url");
+        env = environment;
 
-        WebDriver localDriver;
+        if (!isDriverInitialized) {
+            ConfigReader config = new ConfigReader();
+            config.loadProperties(env);
+            String url = config.get("url");
 
-        switch (browser.toLowerCase()) {
-            case "chrome":
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                if (incognito.equalsIgnoreCase("true")) {
-                    chromeOptions.addArguments("--incognito");
-                }
-                localDriver = new ChromeDriver(chromeOptions);
-                break;
+            WebDriver localDriver;
 
-            case "firefox":
-                WebDriverManager.firefoxdriver().setup();
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                if (incognito.equalsIgnoreCase("true")) {
-                    firefoxOptions.addArguments("-private");
-                }
-                localDriver = new FirefoxDriver(firefoxOptions);
-                break;
+            switch (browser.toLowerCase()) {
+                case "chrome":
+                    WebDriverManager.chromedriver().setup();
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    if (incognito.equalsIgnoreCase("true")) {
+                        chromeOptions.addArguments("--incognito");
+                    }
+                    localDriver = new ChromeDriver(chromeOptions);
+                    break;
 
-            case "edge":
-                WebDriverManager.edgedriver().setup();
-                EdgeOptions edgeOptions = new EdgeOptions();
-                if (incognito.equalsIgnoreCase("true")) {
-                    edgeOptions.addArguments("-inprivate");
-                }
-                localDriver = new EdgeDriver(edgeOptions);
-                break;
+                case "firefox":
+                    WebDriverManager.firefoxdriver().setup();
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    if (incognito.equalsIgnoreCase("true")) {
+                        firefoxOptions.addArguments("-private");
+                    }
+                    localDriver = new FirefoxDriver(firefoxOptions);
+                    break;
 
-            case "safari":
-                // Safari doesn't support incognito through automation
-                localDriver = new org.openqa.selenium.safari.SafariDriver();
-                break;
+                case "edge":
+                    WebDriverManager.edgedriver().setup();
+                    EdgeOptions edgeOptions = new EdgeOptions();
+                    if (incognito.equalsIgnoreCase("true")) {
+                        edgeOptions.addArguments("-inprivate");
+                    }
+                    localDriver = new EdgeDriver(edgeOptions);
+                    break;
 
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browser);
+                case "safari":
+                    localDriver = new org.openqa.selenium.safari.SafariDriver();
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("Unsupported browser: " + browser);
+            }
+
+            localDriver.manage().window().maximize();
+            localDriver.get(url);
+
+            TL_DRIVER.set(localDriver);
+            driver = TL_DRIVER.get();
+            isDriverInitialized = true;
+
+        } else {
+            driver = TL_DRIVER.get(); // reuse if already present
         }
-
-        localDriver.manage().window().maximize();
-        localDriver.get(url);
-
-        TL_DRIVER.set(localDriver);
-        driver = TL_DRIVER.get();
     }
 
     public static WebDriver getDriver() {
         return TL_DRIVER.get();
     }
 
-    @AfterMethod
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
+        // Leave blank if not quitting after each class
+        // Or handle conditional quitting
+    }
+
+    @AfterSuite(alwaysRun = true)
+    public void cleanUpDriver() {
         if (TL_DRIVER.get() != null) {
             TL_DRIVER.get().quit();
             TL_DRIVER.remove();
+            isDriverInitialized = false;
         }
     }
 }

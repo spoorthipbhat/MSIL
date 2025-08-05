@@ -39,4 +39,4 @@ public class OperatorProfilePage {
     wait.until(ExpectedConditions.elementToBeClickable(updateBtn)).click();
      System.out.println("tapped on update button");
 }
- }
+}
