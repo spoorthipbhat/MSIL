@@ -12,7 +12,7 @@ public class MobileNumbergen {
 
     public static String generateDriverCSV(String filename, int count) throws IOException {
         String dirPath = System.getProperty("user.dir") + "/src/test/resources/data";
-        new File(dirPath).mkdirs(); // create dir if not exist
+        new File(dirPath).mkdirs(); 
         String filePath = dirPath + "/" + filename;
     
         FileWriter writer = new FileWriter(filePath);
@@ -25,7 +25,7 @@ public class MobileNumbergen {
             } else {
                 name = FEMALE_NAMES[i % FEMALE_NAMES.length];
             }
-            String phone = "9000000" + String.format("%03d", i + 1); // ensures 9000000001+
+            String phone = "9000000" + String.format("%03d", i + 1); 
             writer.append(name + "," + phone + "\n");
         }
     

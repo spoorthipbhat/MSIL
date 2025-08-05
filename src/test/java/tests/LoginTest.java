@@ -1,6 +1,6 @@
 package tests;
-import org.testng.annotations.Test;
 import base.BaseClass;
+import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.LoginHelper;
 import java.util.Map;

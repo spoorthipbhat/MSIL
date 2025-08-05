@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
-
+import utils.OtpFetcher;
 import base.BaseClass;
 import pages.FleetRegistration;
 import pages.LoginPage;
@@ -15,6 +15,8 @@ public class FleetRegistrationTest extends BaseClass {
     @Test(dataProvider = "activeDrivers", dataProviderClass = utils.TestDataProvider.class)
     public void testFleetRegistration(Map<String, String> row, ITestContext context) throws InterruptedException, IOException {
      
+        String mobile = "67211111111";
+        String otp;
         // ✅ Get FlowId from XML (must be 1-4)
         String flowIdParam = context.getCurrentXmlTest().getParameter("FlowId");
         System.out.println("✅ FlowId = " + flowIdParam);
@@ -38,8 +40,12 @@ public class FleetRegistrationTest extends BaseClass {
         switch (flowId) {
 
             case 1: // Business Fleet → Operator Code
-                loginPage.loginAsOperator("67211111111", "7891");
-                fleetRegistration.addBusinessFleet(
+            
+            loginPage.triggerOtpSend(mobile);
+            otp = OtpFetcher.getOtpBasedOnEnv(env, mobile);
+            loginPage.enterOtp(otp);
+            loginPage.clickVerify();
+                            fleetRegistration.addBusinessFleet(
                         row.get("fleetName"),
                         row.get("aadhaarNumber"),
                         row.get("aadhaarFrontImage"),
@@ -57,8 +63,12 @@ public class FleetRegistrationTest extends BaseClass {
                 break;
 
             case 2: // Individual Fleet → Operator Code
-                loginPage.loginAsOperator("67211111111", "7891");
-                fleetRegistration.addIndividualFleet(
+          
+            loginPage.triggerOtpSend(mobile);
+            otp = OtpFetcher.getOtpBasedOnEnv(env, mobile);
+            loginPage.enterOtp(otp);
+            loginPage.clickVerify();
+                            fleetRegistration.addIndividualFleet(
                         row.get("fleetName"),
                         row.get("aadhaarNumber"),
                         row.get("aadhaarFrontImage"),
@@ -72,8 +82,12 @@ public class FleetRegistrationTest extends BaseClass {
                 break;
 
             case 3: // Add Fleet in Operator → then Business Fleet
-                loginPage.loginAsOperator("61111111111", "7891");
-                fleetRegistration.addFleetInOperator(row.get("mobileNo"), row.get("otp"));
+           
+            loginPage.triggerOtpSend(mobile);
+            otp = OtpFetcher.getOtpBasedOnEnv(env, mobile);
+            loginPage.enterOtp(otp);
+            loginPage.clickVerify();
+                            fleetRegistration.addFleetInOperator(row.get("mobileNo"), row.get("otp"));
                 fleetRegistration.addBusinessFleet(
                         row.get("fleetName"),
                         row.get("aadhaarNumber"),
@@ -91,8 +105,12 @@ public class FleetRegistrationTest extends BaseClass {
                 break;
 
             case 4: // Add Fleet in Operator → then Individual Fleet
-                loginPage.loginAsOperator("61111111111", "7891");   
-                fleetRegistration.addFleetInOperator(row.get("mobileNo"), row.get("otp"));
+           
+            loginPage.triggerOtpSend(mobile);
+            otp = OtpFetcher.getOtpBasedOnEnv(env, mobile);
+            loginPage.enterOtp(otp);
+            loginPage.clickVerify();
+                            fleetRegistration.addFleetInOperator(row.get("mobileNo"), row.get("otp"));
                 fleetRegistration.addIndividualFleet(
                         row.get("fleetName"),
                         row.get("aadhaarNumber"),

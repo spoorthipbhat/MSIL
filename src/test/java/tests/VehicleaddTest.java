@@ -13,12 +13,9 @@ public class VehicleaddTest extends BaseClass {
     @Test(dataProvider = "activeDrivers", dataProviderClass = TestDataProvider.class)
     public void testAddVehicle(Map<String, String> row) throws InterruptedException, IOException {
 
-        // Step 1: Login
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAsOperator("6111111111", "7891");
+        TrackDrivers drivers = new TrackDrivers(driver);
+        drivers.clickUploadForMobile(row.get("DriverMobileNumber"));
 
-        // TrackDrivers dashboard = new TrackDrivers(driver);
-        // dashboard.clickThreeDotsForMobile(row.get("DriverMobileNumber"));
         VehicleaddPage vehiclePage = new VehicleaddPage(driver);
         vehiclePage.addVehicle(
             row.get("DriverMobileNumber"),
