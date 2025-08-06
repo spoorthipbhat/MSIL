@@ -19,7 +19,7 @@ public class TrackDrivers {
     }
 
     public void clickUploadForMobile(String mobileNo) throws InterruptedException {
-        Thread.sleep(4000);
+        Thread.sleep(3000);
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(driver -> {
             try {
                 driver.findElement(refreshBtn).click(); 
@@ -30,9 +30,9 @@ public class TrackDrivers {
                 return false;
             }
         });
-        Thread.sleep(4000);
+        Thread.sleep(3000);
 
-        String xpath = "//div[text()='"+mobileNo+"']/ancestor::tr//div[text()='Upload']";
+        String xpath ="//tbody/tr[td[4]/div/div[text()='"+mobileNo+"']]/td[7]//div/div/div/div";
         new WebDriverWait(driver, Duration.ofSeconds(10))
             .until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)))
             .click();
