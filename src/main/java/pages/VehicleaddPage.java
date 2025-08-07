@@ -18,7 +18,7 @@ public class VehicleaddPage {
     }
 
     // Locators
-    By addVehicleBtn = By.xpath("//div[text()='Add Vehicle']");
+    By addVehicleBtn = By.xpath("//div[contains(@class,'text-black max-w-72 truncate cursor-pointer')][normalize-space()='Add Vehicle']");
     By enterRcNo = By.xpath("//input[@placeholder='Enter RC No.']");
     By rcUpload = By.xpath("//div[contains(text(), 'Registration Certificate')]/following::label//input[@type='file']");
     By uploadrcBtn = By.xpath("//div[text()='Upload RC']");
@@ -42,8 +42,7 @@ public class VehicleaddPage {
                            String fitnessImg, String pucImg, String frontImg, String backImg, String rightImg,
                            String leftImg, String frontIntImg, String backIntImg, String odoImg)
             throws InterruptedException, IOException {
-
-        Thread.sleep(5000);
+                
         driver.findElement(addVehicleBtn).click();
         Thread.sleep(2000);
         driver.findElement(enterRcNo).sendKeys(rcNum);
