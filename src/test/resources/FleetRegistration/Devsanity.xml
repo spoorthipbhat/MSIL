@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SeleniumProjectSuite">
+
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="dev"/>
+    <parameter name="incognito" value="false"/>
+
+    <test name="OperatorProfileFlow">
+        <parameter name="SheetName" value="Sheet"/>
+        <parameter name="FlowName" value="LoginFlowDev"/>
+        <classes>
+        <!-- <class name="tests.LoginTest"/> -->
+            <class name="tests.DriverRegistrationTest"/>
+            <class name="tests.VehicleaddTest"/>
+            
+             </classes>
+                </test>
+</suite>
